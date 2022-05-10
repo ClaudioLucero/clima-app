@@ -5,7 +5,7 @@ import './SearchCities.css';
 function SearchCities() {
   return (
     <div className="search-cities">
-      Hola
+      Hola test
     </div>
   );
 }
