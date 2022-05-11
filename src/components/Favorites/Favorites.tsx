@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Favorites.css';
+import { TiDeleteOutline } from 'react-icons/ti';
 import { City } from '../../models/City';
 
 const INT_STATE:City[] = [
@@ -13,7 +14,10 @@ const INT_STATE:City[] = [
 const Favorites : React.FC = () => {
   const [myCities, setMyCities] = useState<Array<City>>(INT_STATE);
   const cities = myCities.map((city) => (
-    <div className="favourites-city">{city.name}</div>
+    <div className="favourites-city" key={city.id}>
+      {city.name}
+      <TiDeleteOutline />
+    </div>
   ));
 
   return (

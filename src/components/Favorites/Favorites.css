@@ -1,8 +1,7 @@
 .favorites{
     background-color: yellow;
-    height: 3vh;
     display: flex;
-    align-items: center;
+    justify-content: center;
 }
 
 .favourites-city{
