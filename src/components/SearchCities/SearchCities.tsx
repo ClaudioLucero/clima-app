@@ -1,13 +1,10 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React from 'react';
 import './SearchCities.css';
 
-function SearchCities() {
-  return (
-    <div className="search-cities">
-      Hola test2
-    </div>
-  );
-}
+const SearchCities : React.FC = () => (
+  <div className="search-cities">
+    <input className="search-cities-input" />
+  </div>
+);
 
 export default SearchCities;

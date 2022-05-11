@@ -1,0 +1,13 @@
+.favorites{
+    background-color: yellow;
+    height: 3vh;
+    display: flex;
+    align-items: center;
+}
+
+.favourites-city{
+    background-color:aqua;
+    height: 3vh;
+    float:right;
+    margin: 3px;
+}

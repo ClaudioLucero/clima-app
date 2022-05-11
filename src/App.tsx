@@ -1,17 +1,17 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React from 'react';
 import './App.css';
 import SearchCities from './components/SearchCities/SearchCities';
+import Favorites from './components/Favorites/Favorites';
 
-function App() {
-  return (
-    <div className="App">
-      <div className="App-header">
-        <SearchCities />
-      </div>
-      <div className="App-body" />
+const App:React.FC = () => (
+  <div className="App">
+    <div className="App-header" />
+    <div className="App-body">
+      <Favorites />
+      <SearchCities />
     </div>
-  );
-}
+  </div>
+);
 
 export default App;
+// npx eslint src

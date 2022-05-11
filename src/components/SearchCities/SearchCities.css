@@ -1,3 +1,19 @@
 .search-cities{
     background-color: red;
+    /* min-height: 20vh;
+    display: flex;   */
+}
+.search-cities-input{
+    margin: 5px;
+    width: 66%;
+    height: 38px;
+    border-radius: 11px;
+    position: relative;
+    background-color: rgba(227, 239, 241, 0.836);
+    transition: 0.3s all;
+    font-size: 22px;
+}
+.search-cities-input:hover{
+    background-color: rgb(19, 241, 241);
+    box-shadow: 0px 4px 20px 0px rgba(220, 231, 231, 0.05);
 }

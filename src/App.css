@@ -7,13 +7,11 @@
 
 .App-header {
   background-color: green;
-  min-height: 20vh;
-  display: flex;
-  
-  color: white;
+  height: 100px;
 }
 .App-body {
   background-color: orange;
-  min-height: 100vh;
-  display: flex;  
+  min-height: 89.3vh;
+  display: flex;
+  flex-direction: column; 
 }
