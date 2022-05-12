@@ -1,0 +1,23 @@
+.city-data-main{
+    background-color: bisque;
+    height: 31vh;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+.city-data-city{
+    font-size: 44px;
+    margin: 33px;
+}
+.city-data-temps{
+    font-size: 34px;
+    margin: 33px;
+}
+.city-data-temps-max{
+    color:red
+}
+.city-data-temps-min{
+    color:blue
+}

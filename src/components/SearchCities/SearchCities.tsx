@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React, { Fragment, useState } from 'react';
-import './SearchCities.css';
 import { City } from '../../models/City';
 import ResultsCity from '../ResultsCity/ResultsCity';
+import './SearchCities.css';
 
 const INT_STATE:City[] = [
   { name: 'San Luis', id: 1 },

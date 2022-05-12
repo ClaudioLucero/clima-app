@@ -1,14 +1,12 @@
 import React from 'react';
 import './App.css';
-import SearchCities from './components/SearchCities/SearchCities';
-import Favorites from './components/Favorites/Favorites';
+import BodyClima from './components/BodyClima/BodyClima';
 
 const App:React.FC = () => (
   <div className="App">
     <div className="App-header" />
     <div className="App-body">
-      <Favorites />
-      <SearchCities />
+      <BodyClima />
     </div>
   </div>
 );
