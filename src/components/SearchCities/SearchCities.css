@@ -1,7 +1,8 @@
 .search-cities{
     background-color: red;
-    /* min-height: 20vh;
-    display: flex;   */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .search-cities-input{
     margin: 5px;
