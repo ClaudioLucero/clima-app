@@ -82,8 +82,8 @@ const INT_STATE:City[] = [
       },
       {
         day: 'day2',
-        min: '22º',
-        max: '30º',
+        min: '55º',
+        max: '10º',
       },
     ],
   },
@@ -102,11 +102,17 @@ const BodyClima : React.FC = () => {
     setCurrentCity(CURRENT);
     setFavorites(INT_STATE);
   }, []);
+  useEffect(() => {
+    console.log(currentCity);// chequear
+  }, [currentCity]);
+  const updateCurrentCity = (city:City) => {
+    setCurrentCity(city);
+  };
   return (
     <div className="">
-      <Favorites fav={favorites} />
+      <Favorites fav={favorites} callbackCurrentCity={updateCurrentCity} />
       <SearchCities fav={favorites} />
-      <CityData />
+      <CityData current={currentCity} />
       <NextTemps current={currentCity} />
     </div>
   );
