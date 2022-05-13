@@ -20,9 +20,11 @@ const Favorites: React.FC<Props> = ({ fav, callbackCurrentCity }: Props) => {
   const deleteFavorite = (city:string) => {
     setFavs(favs.filter((item) => item.name !== city));
   };
+
   const selectFavorite = (city:City) => {
     callbackCurrentCity(city);
   };
+
   const cities = favs.map((city) => (
     <div className="favourites-city" key={city.id}>
       <div
@@ -47,7 +49,6 @@ const Favorites: React.FC<Props> = ({ fav, callbackCurrentCity }: Props) => {
       </div>
     </div>
   ));
-
   return (
     <div className="favorites">
       {favs.length > 0

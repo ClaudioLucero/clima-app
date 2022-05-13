@@ -1,32 +1,34 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import React, { Fragment, useState } from 'react';
-import { City } from '../../models/City';
+import React, { useEffect, useState } from 'react';
 import ResultsCity from '../ResultsCity/ResultsCity';
-import { searchProvice } from '../../services/searchProvices.js';
+import { searchProvince } from '../../services/searchProvinces';
+import { City } from '../../models/City';
 import './SearchCities.css';
 
 interface Props {
   fav: City[]
 }
-
 const SearchCities: React.FC<Props> = ({ fav }: Props) => {
-  const [myCities, setMyCities] = useState<Array<City>>([]);
   const [valueSearch, setValueSearch] = useState('');
+  const [results, setResults] = useState<City[]>([]);
+
   const handleInput = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    // setMyCities(fav);
     setValueSearch(evt.target.value);
     const { value } = evt.target;
     if (value.length > 2) {
-      searchProvice(value.toLocaleUpperCase());
+      const res:City[] = searchProvince(value.toLocaleUpperCase());
+      setResults(res);
+    } else {
+      setResults([]);
     }
   };
 
   return (
     <div className="search-cities">
       <input className="search-cities-input" onChange={handleInput} value={valueSearch} />
-      {myCities.length > 0 && (
-        <div />
-      )}
+      {results.length > 0
+        ? <ResultsCity results={results} />
+        : null}
     </div>
   );
 };

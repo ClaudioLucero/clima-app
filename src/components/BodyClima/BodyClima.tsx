@@ -98,13 +98,16 @@ interface AppState {
 const BodyClima : React.FC = () => {
   const [currentCity, setCurrentCity] = useState<AppState['currentCity']>(CURRENT);
   const [favorites, setFavorites] = useState<AppState['favorites']>([]);
+
   useEffect(() => {
     setCurrentCity(CURRENT);
     setFavorites(INT_STATE);
   }, []);
+
   useEffect(() => {
     console.log(currentCity);// chequear
   }, [currentCity]);
+
   const updateCurrentCity = (city:City) => {
     setCurrentCity(city);
   };

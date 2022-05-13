@@ -4,15 +4,15 @@
     position: absolute;
     width: 66%;
     flex-direction: column;
-    align-items: flex-start;
-    margin-top:54px
+    margin-top: 54px;
+    align-items: stretch;
 }
 .results-city-res{
     display: flex;
-    align-items: baseline;
     border-bottom: solid;
     border-width: 1px;
     margin: 3px;
+    justify-content: space-between;
 }
 .results-city-ico{
     cursor: pointer;
