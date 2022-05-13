@@ -5,8 +5,18 @@
 }
 
 .favourites-city{
-    background-color:aqua;
-    height: 3vh;
-    float:right;
+    background-color: aqua;
+    height: 4vh;
     margin: 3px;
+    display: flex;
+    align-items: center;
+}
+.favourites-city-icon{
+    margin-left: 5px;
+    cursor: pointer;
+}
+.favourites-city-name{
+    margin-left: 5px;
+    cursor: pointer;
+    font-size: 18px;
 }
