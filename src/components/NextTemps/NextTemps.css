@@ -1,3 +1,14 @@
 .next-temps-main{
     background-color:azure;
 }
+.next-temps-days{
+    display: flex;
+    justify-content: center; 
+    margin:10px 
+}
+.next-temps-days-title{
+    margin-right: 22px;
+}
+.next-temps-days-max{
+    margin-right: 10px;
+}

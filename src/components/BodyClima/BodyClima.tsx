@@ -1,31 +1,113 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import React, { Fragment, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SearchCities from '../SearchCities/SearchCities';
 import Favorites from '../Favorites/Favorites';
 import CityData from '../CityData/CityData';
 import NextTemps from '../NextTemps/NextTemps';
 import { City } from '../../models/City';
 
+const CURRENT:City = {
+  name: 'San Luis',
+  id: 1,
+  temps: [
+    {
+      day: 'day1',
+      min: '22º',
+      max: '30º',
+    },
+    {
+      day: 'day2',
+      min: '22º',
+      max: '30º',
+    },
+  ],
+};
 const INT_STATE:City[] = [
-  { name: 'San Luis', id: 1 },
-  { name: 'Cordoba', id: 2 },
-  { name: 'Buenos Aires', id: 3 },
-  { name: 'Mendoza', id: 4 },
-  { name: 'Salta', id: 5 },
+  {
+    name: 'San Luis',
+    id: 1,
+    temps: [
+      {
+        day: 'day1',
+        min: '22º',
+        max: '30º',
+      },
+      {
+        day: 'day2',
+        min: '22º',
+        max: '30º',
+      },
+    ],
+  },
+  {
+    name: 'Cordoba',
+    id: 2,
+    temps: [
+      {
+        day: 'day1',
+        min: '22º',
+        max: '30º',
+      },
+      {
+        day: 'day2',
+        min: '22º',
+        max: '30º',
+      },
+    ],
+  },
+  {
+    name: 'Mendoza',
+    id: 4,
+    temps: [
+      {
+        day: 'day1',
+        min: '22º',
+        max: '30º',
+      },
+      {
+        day: 'day2',
+        min: '22º',
+        max: '30º',
+      },
+    ],
+  },
+  {
+    name: 'Buenos Aires',
+    id: 5,
+    temps: [
+      {
+        day: 'day1',
+        min: '22º',
+        max: '30º',
+      },
+      {
+        day: 'day2',
+        min: '22º',
+        max: '30º',
+      },
+    ],
+  },
+
 ];
 
 interface AppState {
-    currentCity:City
+    currentCity:City,
+    favorites:City[]
 }
 
 const BodyClima : React.FC = () => {
-  const [city, setCity] = useState(INT_STATE[0]);
+  const [currentCity, setCurrentCity] = useState<AppState['currentCity']>(CURRENT);
+  const [favorites, setFavorites] = useState<AppState['favorites']>([]);
+  useEffect(() => {
+    setCurrentCity(CURRENT);
+    setFavorites(INT_STATE);
+  }, []);
   return (
     <div className="">
-      <Favorites />
-      <SearchCities />
-      <CityData city={city} />
-      <NextTemps />
+      <Favorites fav={favorites} />
+      <SearchCities fav={favorites} />
+      <CityData />
+      <NextTemps current={currentCity} />
     </div>
   );
 };

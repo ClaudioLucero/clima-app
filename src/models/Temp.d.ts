@@ -1,4 +1,5 @@
 export interface Temp {
-    Max:string
-    Min:string
+    day:string
+    max:string
+    min:string
 }

@@ -3,27 +3,21 @@ import React from 'react';
 import { City } from '../../models/City';
 import './NextTemps.css';
 
-interface cityTemps{
-    day:string,
-    min:string,
-    max:string
+interface Props {
+  current:City
 }
-const INT_STATE:cityTemps[] = [
-  { day: '2', max: '23º', min: '29º' },
-  { day: '3', max: '23º', min: '29º' },
-  { day: '4', max: '23º', min: '29º' },
-  { day: '5', max: '23º', min: '29º' },
-  { day: '6', max: '23º', min: '29º' },
-];
-const NextTemps:React.FC = () => {
-  const temps = INT_STATE.map((temp) => (
+const NextTemps:React.FC<Props> = ({ current }:Props) => {
+  const { temps } = current;
+  const data = temps.map((temp) => (
     <div className="next-temps-days">
-      {temp.day}
+      <div className="next-temps-days-title">{temp.day}</div>
+      <div className="next-temps-days-max">{temp.max}</div>
+      <div className="next-temps-days-min">{temp.min}</div>
     </div>
   ));
   return (
     <div className="next-temps-main">
-      {temps}
+      {data}
     </div>
   );
 };

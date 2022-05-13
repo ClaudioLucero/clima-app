@@ -1,19 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Favorites.css';
 import { TiDeleteOutline } from 'react-icons/ti';
 import { City } from '../../models/City';
 
-const INT_STATE:City[] = [
-  { name: 'San Luis', id: 1 },
-  { name: 'Cordoba', id: 2 },
-  { name: 'Buenos Aires', id: 3 },
-  { name: 'Mendoza', id: 4 },
-  { name: 'Salta', id: 5 },
-];
+interface Props {
+  fav:City[]
+}
+interface AppState {
+  myFavorites:City[]
+}
+const Favorites:React.FC<Props> = ({ fav }:Props) => {
+  const [favs, setFavs] = useState<AppState['myFavorites']>([]);
+  useEffect(() => {
+    setFavs(fav);
+  }, [fav]);
+  // eslint-disable-next-line no-trailing-spaces
 
-const Favorites : React.FC = () => {
-  const [myCities, setMyCities] = useState<Array<City>>(INT_STATE);
-  const cities = myCities.map((city) => (
+  const cities = favs.map((city) => (
     <div className="favourites-city" key={city.id}>
       {city.name}
       <TiDeleteOutline />
@@ -22,7 +25,9 @@ const Favorites : React.FC = () => {
 
   return (
     <div className="favorites">
-      {cities}
+      {favs.length > 0
+        ? cities
+        : null}
     </div>
   );
 };
