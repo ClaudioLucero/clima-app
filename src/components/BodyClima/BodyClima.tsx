@@ -4,26 +4,10 @@ import SearchCities from '../SearchCities/SearchCities';
 import Favorites from '../Favorites/Favorites';
 import CityData from '../CityData/CityData';
 import NextTemps from '../NextTemps/NextTemps';
+import { getClimaById } from '../../services/apliClima';
 import { City } from '../../models/City';
 
-const CURRENT:City = {
-  name: 'San Luis',
-  id: 3837029,
-  fav: false,
-  temps: [
-    {
-      day: 'day1',
-      min: '22º',
-      max: '30º',
-    },
-    {
-      day: 'day2',
-      min: '22º',
-      max: '30º',
-    },
-  ],
-};
-const INT_STATE:City[] = [
+const INT_STATE: City[] = [
   {
     name: 'San Luis',
     id: 3837029,
@@ -96,32 +80,37 @@ const INT_STATE:City[] = [
 ];
 
 interface AppState {
-    currentCity:City,
-    favorites:City[]
+  currentCity: City,
+  favorites: City[]
 }
 
-const BodyClima : React.FC = () => {
-  const [currentCity, setCurrentCity] = useState<AppState['currentCity']>(CURRENT);
+const BodyClima: React.FC = () => {
+  const [currentCity, setCurrentCity] = useState<AppState['currentCity']>();
   const [favorites, setFavorites] = useState<AppState['favorites']>([]);
 
   useEffect(() => {
-    setCurrentCity(CURRENT);
-    setFavorites(INT_STATE);
+    getClimaById(3837029).then((data:City) => {
+      if (data) {
+        setCurrentCity(data);
+      }
+    });
   }, []);
 
-  useEffect(() => {
-    console.log(currentCity);// chequear
-  }, [currentCity]);
-
-  const updateCurrentCity = (city:City) => {
+  const updateCurrentCity = (city: City) => {
     setCurrentCity(city);
   };
   return (
     <div className="">
       <Favorites fav={favorites} callbackCurrentCity={updateCurrentCity} />
       <SearchCities fav={favorites} callbackSetCurrentCity={updateCurrentCity} />
-      <CityData current={currentCity} />
-      <NextTemps current={currentCity} />
+      {currentCity
+        ? (
+          <>
+            <CityData current={currentCity} />
+            <NextTemps current={currentCity} />
+          </>
+        )
+        : null}
     </div>
   );
 };
