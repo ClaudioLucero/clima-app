@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './ResultsCity.css';
-import { AiOutlineStar } from 'react-icons/ai';
+import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 import { City } from '../../models/City';
 
 interface Props {
@@ -12,7 +12,9 @@ const ResultsCity : React.FC<Props> = ({ results }:Props) => {
       <p className="results-city-name">
         {city.name}
       </p>
-      <AiOutlineStar className="results-city-ico" />
+      {city.fav === true
+        ? <AiFillStar className="results-city-ico" />
+        : <AiOutlineStar className="results-city-ico" />}
     </div>
   ));
   return (

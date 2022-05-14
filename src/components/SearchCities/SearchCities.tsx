@@ -16,7 +16,7 @@ const SearchCities: React.FC<Props> = ({ fav }: Props) => {
     setValueSearch(evt.target.value);
     const { value } = evt.target;
     if (value.length > 2) {
-      const res:City[] = searchProvince(value.toLocaleUpperCase());
+      const res:City[] = searchProvince(value.toLocaleUpperCase(), fav);
       setResults(res);
     } else {
       setResults([]);

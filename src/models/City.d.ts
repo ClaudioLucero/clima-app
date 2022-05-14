@@ -4,4 +4,5 @@ export interface City {
     name:string
     id:number
     temps:Temp[]
+    fav:bool
 }

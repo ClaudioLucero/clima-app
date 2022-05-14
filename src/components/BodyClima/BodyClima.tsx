@@ -8,7 +8,8 @@ import { City } from '../../models/City';
 
 const CURRENT:City = {
   name: 'San Luis',
-  id: 1,
+  id: 3837029,
+  fav: false,
   temps: [
     {
       day: 'day1',
@@ -25,7 +26,8 @@ const CURRENT:City = {
 const INT_STATE:City[] = [
   {
     name: 'San Luis',
-    id: 1,
+    id: 3837029,
+    fav: true,
     temps: [
       {
         day: 'day1',
@@ -41,7 +43,8 @@ const INT_STATE:City[] = [
   },
   {
     name: 'Cordoba',
-    id: 2,
+    id: 3860255,
+    fav: true,
     temps: [
       {
         day: 'day1',
@@ -57,7 +60,8 @@ const INT_STATE:City[] = [
   },
   {
     name: 'Mendoza',
-    id: 4,
+    id: 3844419,
+    fav: true,
     temps: [
       {
         day: 'day1',
@@ -73,7 +77,8 @@ const INT_STATE:City[] = [
   },
   {
     name: 'Buenos Aires',
-    id: 5,
+    id: 3433955,
+    fav: true,
     temps: [
       {
         day: 'day1',
