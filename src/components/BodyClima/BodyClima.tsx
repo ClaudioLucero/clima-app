@@ -119,7 +119,7 @@ const BodyClima : React.FC = () => {
   return (
     <div className="">
       <Favorites fav={favorites} callbackCurrentCity={updateCurrentCity} />
-      <SearchCities fav={favorites} />
+      <SearchCities fav={favorites} callbackSetCurrentCity={updateCurrentCity} />
       <CityData current={currentCity} />
       <NextTemps current={currentCity} />
     </div>
