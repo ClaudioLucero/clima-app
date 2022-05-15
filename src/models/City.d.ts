@@ -5,4 +5,6 @@ export interface City {
     id:number
     temps:Temp[]
     fav:bool
+    lon?:number
+    lat?:number
 }

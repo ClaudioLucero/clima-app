@@ -13,6 +13,7 @@ interface Props {
 const SearchCities: React.FC<Props> = ({ fav, callbackSetCurrentCity }: Props) => {
   const [valueSearch, setValueSearch] = useState('');
   const [results, setResults] = useState<City[]>([]);
+
   const changeValueInput = (city:City) => {
     setValueSearch(city.name);
     callbackSetCurrentCity(city);
@@ -29,7 +30,6 @@ const SearchCities: React.FC<Props> = ({ fav, callbackSetCurrentCity }: Props) =
       setResults([]);
     }
   };
-
   return (
     <div className="search-cities">
       <input className="search-cities-input" onChange={handleInput} value={valueSearch} />
