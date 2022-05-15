@@ -4,7 +4,7 @@ import SearchCities from '../SearchCities/SearchCities';
 import Favorites from '../Favorites/Favorites';
 import CityData from '../CityData/CityData';
 import NextTemps from '../NextTemps/NextTemps';
-import { getClimaById } from '../../services/apliClima';
+import { getClimaByGelocation } from '../../services/apliClima';
 import { City } from '../../models/City';
 
 const INT_STATE: City[] = [
@@ -79,19 +79,25 @@ const INT_STATE: City[] = [
 
 ];
 
+interface Props {
+  lon:number,
+  lat:number
+}
+
 interface AppState {
   currentCity: City,
   favorites: City[]
 }
 
-const BodyClima: React.FC = () => {
+const BodyClima: React.FC<Props> = ({ lon, lat }: Props) => {
   const [currentCity, setCurrentCity] = useState<AppState['currentCity']>();
   const [favorites, setFavorites] = useState<AppState['favorites']>([]);
 
   useEffect(() => {
-    getClimaById(3837029).then((data:City) => {
+    getClimaByGelocation(lat, lon).then((data:City) => {
       if (data) {
         setCurrentCity(data);
+        setFavorites(INT_STATE);
       }
     });
   }, []);
