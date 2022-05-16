@@ -5,12 +5,22 @@ import { formatDataTempResApi, formatDataResCity } from '../utils/utils';
 import { City } from '../models/City';
 import { Temp } from '../models/Temp';
 
+const API = 'https://api.openweathermap.org/data/2.5';
+const APIKEY = '9d03f75cd013afb4dacea81fe4cd97ca';
+
+const formatQuery = (type:string, id?:number, lat?:number, lon?:number) => {
+  if (lat) {
+    return `${API}/${type}?lat=${lat}&lon=${lon}&appid=${APIKEY}&cnt=5&units=metric`;
+  }
+  return `${API}/${type}?id=${id}&appid=${APIKEY}&cnt=5&units=metric`;
+};
+
 export const getClimaById = async (id:number) => {
-  const res = fetch(`https://api.openweathermap.org/data/2.5/weather?id=${id}&appid=9d03f75cd013afb4dacea81fe4cd97ca&units=metric`);
+  const res = fetch(formatQuery('weather', id));
   const data = await (await res).json();
   const dataCity:City = formatDataResCity(data, false);
   if (dataCity) {
-    const res2 = fetch(`https://api.openweathermap.org/data/2.5/forecast?id=${id}&cnt=5&appid=9d03f75cd013afb4dacea81fe4cd97ca&units=metric`);
+    const res2 = fetch(formatQuery('forecast', id));
     const data2 = await (await res2).json();
     const temps:Temp[] = formatDataTempResApi(data2.list);
     dataCity.temps = temps;
@@ -18,49 +28,14 @@ export const getClimaById = async (id:number) => {
   return dataCity;
 };
 export const getClimaByGelocation = async (lat:number, lon:number) => {
-  const res = fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=9d03f75cd013afb4dacea81fe4cd97ca&units=metric`);
+  const res = fetch(formatQuery('weather', 0, lat, lon));
   const data = await (await res).json();
   const dataCity:City = formatDataResCity(data, false);
   if (dataCity) {
-    const res2 = fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&cnt=5&appid=9d03f75cd013afb4dacea81fe4cd97ca&units=metric`);
+    const res2 = fetch(formatQuery('forecast', 0, lat, lon));
     const data2 = await (await res2).json();
     const temps:Temp[] = formatDataTempResApi(data2.list);
     dataCity.temps = temps;
   }
   return dataCity;
 };
-
-// export const getPronosticoClimaById = async (id:number) => {
-//   const res = fetch(`https://api.openweathermap.org/data/2.5/forecast?id=${id}&appid=9d03f75cd013afb4dacea81fe4cd97ca&units=metric`);
-//   const data = await (await res).json();
-//   const resCity: City = {
-//     name: data.name,
-//     id: data.id,
-//     fav: false,
-//     temps: [
-//       {
-//         day: 'string',
-//         max: data.main.temp_max,
-//         min: data.main.temp_min,
-//       },
-//     ],
-//   };
-//   return resCity;
-// };
-// export const getPronosticoByGelocation = async (lat:number, lon:number) => {
-//   const res = fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&cnt=5&appid=9d03f75cd013afb4dacea81fe4cd97ca&units=metric`);
-//   const data = await (await res).json();
-//   const resCity: City = {
-//     name: data.name,
-//     id: data.id,
-//     fav: false,
-//     temps: [
-//       {
-//         day: 'string',
-//         max: data.main.temp_max,
-//         min: data.main.temp_min,
-//       },
-//     ],
-//   };
-//   return resCity;
-// };
