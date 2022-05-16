@@ -4,13 +4,14 @@ import React, { useEffect, useState } from 'react';
 import './ResultsCity.css';
 import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 import { City } from '../../models/City';
+import { Favorite } from '../../models/Favorite';
 
 interface Props {
-  results: City[],
+  results: Favorite[],
   callbackValueSearch:Function
 }
 const ResultsCity: React.FC<Props> = ({ results, callbackValueSearch }: Props) => {
-  const selectResultCity = (city: City) => {
+  const selectResultCity = (city: Favorite) => {
     callbackValueSearch(city);
   };
 

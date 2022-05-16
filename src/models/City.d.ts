@@ -4,7 +4,6 @@ export interface City {
     name:string
     id:number
     temps:Temp[]
+    todayTemp?:Temp
     fav:bool
-    lon?:number
-    lat?:number
 }

@@ -16,10 +16,10 @@ const DataCity: React.FC<Props> = ({ current }: Props) => {
       </div>
       <div className="city-data-temps">
         <div className="city-data-temps-max">
-          {temps[0].max}
+          {3434}
         </div>
         <div className="city-data-temps-min">
-          {temps[0].min}
+          {3434}
         </div>
       </div>
     </div>

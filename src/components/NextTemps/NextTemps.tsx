@@ -10,9 +10,9 @@ const NextTemps:React.FC<Props> = ({ current }:Props) => {
   const { temps } = current;
   const data = temps.map((temp) => (
     <div className="next-temps-days">
-      <div className="next-temps-days-title">{temp.day}</div>
-      <div className="next-temps-days-max">{temp.max}</div>
-      <div className="next-temps-days-min">{temp.min}</div>
+      <div className="next-temps-days-title">{323}</div>
+      <div className="next-temps-days-max">{434}</div>
+      <div className="next-temps-days-min">{3434}</div>
     </div>
   ));
   return (

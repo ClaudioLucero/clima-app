@@ -6,78 +6,8 @@ import CityData from '../CityData/CityData';
 import NextTemps from '../NextTemps/NextTemps';
 import { getClimaByGelocation, getClimaById } from '../../services/apliClima';
 import { City } from '../../models/City';
-
-const INT_STATE: City[] = [
-  {
-    name: 'San Luis',
-    id: 3837029,
-    fav: true,
-    temps: [
-      {
-        day: 'day1',
-        min: '22º',
-        max: '30º',
-      },
-      {
-        day: 'day2',
-        min: '22º',
-        max: '30º',
-      },
-    ],
-  },
-  {
-    name: 'Cordoba',
-    id: 3860255,
-    fav: true,
-    temps: [
-      {
-        day: 'day1',
-        min: '22º',
-        max: '30º',
-      },
-      {
-        day: 'day2',
-        min: '22º',
-        max: '30º',
-      },
-    ],
-  },
-  {
-    name: 'Mendoza',
-    id: 3844419,
-    fav: true,
-    temps: [
-      {
-        day: 'day1',
-        min: '22º',
-        max: '30º',
-      },
-      {
-        day: 'day2',
-        min: '22º',
-        max: '30º',
-      },
-    ],
-  },
-  {
-    name: 'Buenos Aires',
-    id: 3433955,
-    fav: true,
-    temps: [
-      {
-        day: 'day1',
-        min: '22º',
-        max: '30º',
-      },
-      {
-        day: 'day2',
-        min: '55º',
-        max: '10º',
-      },
-    ],
-  },
-
-];
+import { Favorite } from '../../models/Favorite';
+import { getFavorites } from '../../utils/utils';
 
 interface Props {
   lon:number,
@@ -85,39 +15,58 @@ interface Props {
 }
 
 interface AppState {
-  currentCity: City,
-  favorites: City[]
+  currentCityId: number
+  favorites:Favorite[]
+  cityData: City
 }
 
 const BodyClima: React.FC<Props> = ({ lon, lat }: Props) => {
-  const [currentCity, setCurrentCity] = useState<AppState['currentCity']>();
+  const [currentCityId, setCurrentCityId] = useState<AppState['currentCityId']>();
+  const [cityData, setCityData] = useState<AppState['cityData']>();
   const [favorites, setFavorites] = useState<AppState['favorites']>([]);
 
+  const deleteFavorite = (id:number) => {
+    setFavorites(favorites.filter((item) => item.id !== id));
+  };
+
+  const updateCurrentCity = (id:number) => {
+    getClimaById(id).then((data:City) => {
+      if (data) {
+        setCurrentCityId(data.id);
+        setCityData(data);
+      }
+    });
+  };
   useEffect(() => {
+    const myFavorites = getFavorites();
     getClimaByGelocation(lat, lon).then((data:City) => {
       if (data) {
-        setCurrentCity(data);
-        setFavorites(INT_STATE);
+        setCityData(data);
+        setCurrentCityId(data.id);
+        setFavorites(myFavorites);
       }
     });
   }, []);
 
-  const updateCurrentCity = (city: City) => {
-    getClimaById(city.id).then((data:City) => {
-      if (data) {
-        setCurrentCity(data);
-      }
-    });
-  };
+  useEffect(() => {
+    if (cityData) {
+      setCurrentCityId(cityData.id);
+    }
+  }, [cityData]);
+
   return (
     <div className="">
-      <Favorites fav={favorites} callbackCurrentCity={updateCurrentCity} />
-      <SearchCities fav={favorites} callbackSetCurrentCity={updateCurrentCity} />
-      {currentCity
+      <Favorites
+        myFavorites={favorites}
+        callbackCurrentCity={updateCurrentCity}
+        callbackDeleteFavorite={deleteFavorite}
+      />
+      <SearchCities myFavorites={favorites} callbackSetCurrentCity={updateCurrentCity} />
+      {cityData
         ? (
           <>
-            <CityData current={currentCity} />
-            <NextTemps current={currentCity} />
+            <CityData current={cityData} />
+            <NextTemps current={cityData} />
           </>
         )
         : null}

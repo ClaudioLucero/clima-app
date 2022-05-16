@@ -3,37 +3,39 @@
 import React, { useEffect, useState } from 'react';
 import './Favorites.css';
 import { City } from '../../models/City';
+import { Favorite } from '../../models/Favorite';
 
 interface Props {
-  fav: City[],
-  callbackCurrentCity:Function
+  myFavorites: Favorite[],
+  callbackCurrentCity: Function
+  callbackDeleteFavorite: Function
 }
 interface AppState {
-  myFavorites: City[]
+  favs: Favorite[]
 }
-const Favorites: React.FC<Props> = ({ fav, callbackCurrentCity }: Props) => {
-  const [favs, setFavs] = useState<AppState['myFavorites']>([]);
-  useEffect(() => {
-    setFavs(fav);
-  }, [fav]);
 
-  const deleteFavorite = (city:string) => {
-    setFavs(favs.filter((item) => item.name !== city));
+const Favorites: React.FC<Props> = ({
+  myFavorites,
+  callbackCurrentCity,
+  callbackDeleteFavorite,
+}: Props) => {
+  const deleteFavorite = (id: number) => {
+    callbackDeleteFavorite(id);
   };
 
-  const selectFavorite = (city:City) => {
-    callbackCurrentCity(city);
+  const selectFavorite = (id: number) => {
+    callbackCurrentCity(id);
   };
 
-  const cities = favs.map((city) => (
+  const cities = myFavorites.map((city) => (
     <div className="favourites-city" key={city.id}>
       <div
         className="favourites-city-name"
         role="button"
         title={city.name}
         tabIndex={0}
-        onClick={() => { selectFavorite(city); }}
-        onKeyDown={() => { selectFavorite(city); }}
+        onClick={() => { selectFavorite(city.id); }}
+        onKeyDown={() => { selectFavorite(city.id); }}
       >
         {city.name}
       </div>
@@ -42,8 +44,8 @@ const Favorites: React.FC<Props> = ({ fav, callbackCurrentCity }: Props) => {
         role="button"
         tabIndex={0}
         title={city.name}
-        onClick={() => { deleteFavorite(city.name); }}
-        onKeyDown={() => { deleteFavorite(city.name); }}
+        onClick={() => { deleteFavorite(city.id); }}
+        onKeyDown={() => { deleteFavorite(city.id); }}
       >
         X
       </div>
@@ -51,7 +53,7 @@ const Favorites: React.FC<Props> = ({ fav, callbackCurrentCity }: Props) => {
   ));
   return (
     <div className="favorites">
-      {favs.length > 0
+      {myFavorites.length > 0
         ? cities
         : null}
     </div>

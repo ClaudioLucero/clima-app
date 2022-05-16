@@ -2,21 +2,22 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React, { useEffect, useState } from 'react';
 import ResultsCity from '../ResultsCity/ResultsCity';
-import { searchProvince } from '../../services/searchProvinces';
+import { searchProvince } from '../../utils/utils';
 import { City } from '../../models/City';
+import { Favorite } from '../../models/Favorite';
 import './SearchCities.css';
 
 interface Props {
-  fav: City[],
+  myFavorites: Favorite[],
   callbackSetCurrentCity:Function
 }
-const SearchCities: React.FC<Props> = ({ fav, callbackSetCurrentCity }: Props) => {
+const SearchCities: React.FC<Props> = ({ myFavorites, callbackSetCurrentCity }: Props) => {
   const [valueSearch, setValueSearch] = useState('');
-  const [results, setResults] = useState<City[]>([]);
+  const [results, setResults] = useState<Favorite[]>([]);
 
   const changeValueInput = (city:City) => {
     setValueSearch(city.name);
-    callbackSetCurrentCity(city);
+    callbackSetCurrentCity(city.id);
     setResults([]);
   };
 
@@ -24,7 +25,7 @@ const SearchCities: React.FC<Props> = ({ fav, callbackSetCurrentCity }: Props) =
     setValueSearch(evt.target.value);
     const { value } = evt.target;
     if (value.length > 2) {
-      const res:City[] = searchProvince(value.toLocaleUpperCase(), fav);
+      const res:Favorite[] = searchProvince(value.toLocaleUpperCase(), myFavorites);
       setResults(res);
     } else {
       setResults([]);
