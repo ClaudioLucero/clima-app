@@ -1,10 +1,13 @@
 .results-city{
-    background-color: aquamarine;
+    background-color: #cce7ff;
+    border-radius: 10px;
+    padding: 6px;
+    opacity: 0.96;
     display: flex;
     position: absolute;
     width: 66%;
     flex-direction: column;
-    margin-top: 54px;
+    margin-top: 58px;
     align-items: stretch;
 }
 .results-city-res{
