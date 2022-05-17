@@ -26,7 +26,11 @@ const App: React.FC = () => {
   }, []);
   return (
     <div className="App">
-      <div className="App-header" />
+      <div className="App-header">
+        <div id="cloud-intro">
+          <div className="App-header-font">ClimApp</div>
+        </div>
+      </div>
       <div className="App-body">
         {lon && lat
           ? <BodyClima lon={lon} lat={lat} />
