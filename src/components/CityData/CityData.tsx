@@ -8,7 +8,7 @@ interface Props {
 }
 
 const DataCity: React.FC<Props> = ({ current }: Props) => {
-  const { name, temps } = current;
+  const { name, todayTemp } = current;
   return (
     <div className="city-data-main">
       <div className="city-data-city">
@@ -16,10 +16,10 @@ const DataCity: React.FC<Props> = ({ current }: Props) => {
       </div>
       <div className="city-data-temps">
         <div className="city-data-temps-max">
-          {3434}
+          {todayTemp.max_temp}
         </div>
         <div className="city-data-temps-min">
-          {3434}
+          {todayTemp.min_temp}
         </div>
       </div>
     </div>

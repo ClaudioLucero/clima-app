@@ -44,6 +44,7 @@ const BodyClima: React.FC<Props> = ({ lon, lat }: Props) => {
         setCityData(data);
         setCurrentCityId(data.id);
         setFavorites(myFavorites);
+        console.log(data);
       }
     });
   }, []);

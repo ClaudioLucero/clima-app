@@ -4,6 +4,6 @@ export interface City {
     name:string
     id:number
     temps:Temp[]
-    todayTemp?:Temp
+    todayTemp:Temp
     fav:bool
 }
