@@ -1,22 +1,25 @@
 .favorites{
-    background-color: yellow;
     display: flex;
     justify-content: center;
 }
 
 .favourites-city{
-    background-color: aqua;
-    height: 4vh;
+    Background-color: #007ced;
+    border-color: white;
+    color: white;
+    height: 3vh;
     margin: 3px;
     display: flex;
     align-items: center;
+    padding: 4px;
+    border-radius: 12px;
 }
 .favourites-city-icon{
     margin-left: 5px;
     cursor: pointer;
 }
 .favourites-city-name{
-    margin-left: 5px;
+    margin: 5px;
     cursor: pointer;
     font-size: 18px;
 }

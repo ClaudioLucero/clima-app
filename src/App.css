@@ -11,7 +11,8 @@
 	background: linear-gradient(to bottom, #007ced 1%,#cce7ff 100%);
 }
 .App-body {
-  background-color: orange;
+  background-color: #007ced;
+	background: linear-gradient(to top, #007ced 1%,#cce7ff 100%);
   min-height: 89.3vh;
   display: flex;
   flex-direction: column; 
