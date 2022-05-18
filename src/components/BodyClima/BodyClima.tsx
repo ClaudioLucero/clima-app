@@ -11,13 +11,13 @@ import { getFavorites } from '../../utils/utils';
 import './BodyClima.css';
 
 interface Props {
-  lon:number,
-  lat:number
+  lon: number,
+  lat: number
 }
 
 interface AppState {
   currentCityId: number
-  favorites:Favorite[]
+  favorites: Favorite[]
   cityData: City
 }
 
@@ -26,12 +26,17 @@ const BodyClima: React.FC<Props> = ({ lon, lat }: Props) => {
   const [cityData, setCityData] = useState<AppState['cityData']>();
   const [favorites, setFavorites] = useState<AppState['favorites']>([]);
 
-  const deleteFavorite = (id:number) => {
+  const deleteFavorite = (id: number) => {
     setFavorites(favorites.filter((item) => item.id !== id));
   };
+  const addFavorite = (city:Favorite) => {
+    if (favorites.length < 5) {
+      setFavorites((prev: Favorite[]) => [...prev, city]);
+    }
+  };
 
-  const updateCurrentCity = (id:number) => {
-    getClimaById(id).then((data:City) => {
+  const updateCurrentCity = (id: number) => {
+    getClimaById(id).then((data: City) => {
       if (data) {
         setCurrentCityId(data.id);
         setCityData(data);
@@ -40,7 +45,7 @@ const BodyClima: React.FC<Props> = ({ lon, lat }: Props) => {
   };
   useEffect(() => {
     const myFavorites = getFavorites();
-    getClimaByGelocation(lat, lon).then((data:City) => {
+    getClimaByGelocation(lat, lon).then((data: City) => {
       if (data) {
         setCityData(data);
         setCurrentCityId(data.id);
@@ -60,10 +65,15 @@ const BodyClima: React.FC<Props> = ({ lon, lat }: Props) => {
     <div className="body-clima-main">
       <Favorites
         myFavorites={favorites}
-        callbackCurrentCity={updateCurrentCity}
-        callbackDeleteFavorite={deleteFavorite}
+        callBackCurrentCity={updateCurrentCity}
+        callBackDeleteFavorite={deleteFavorite}
       />
-      <SearchCities myFavorites={favorites} callbackSetCurrentCity={updateCurrentCity} />
+      <SearchCities
+        myFavorites={favorites}
+        callBackSetCurrentCity={updateCurrentCity}
+        callBackDeleteFavorite={deleteFavorite}
+        callBackAddFavorite={addFavorite}
+      />
       {cityData
         ? (
           <>

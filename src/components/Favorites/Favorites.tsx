@@ -7,8 +7,8 @@ import { Favorite } from '../../models/Favorite';
 
 interface Props {
   myFavorites: Favorite[],
-  callbackCurrentCity: Function
-  callbackDeleteFavorite: Function
+  callBackCurrentCity: Function
+  callBackDeleteFavorite: Function
 }
 interface AppState {
   favs: Favorite[]
@@ -16,15 +16,15 @@ interface AppState {
 
 const Favorites: React.FC<Props> = ({
   myFavorites,
-  callbackCurrentCity,
-  callbackDeleteFavorite,
+  callBackCurrentCity,
+  callBackDeleteFavorite,
 }: Props) => {
   const deleteFavorite = (id: number) => {
-    callbackDeleteFavorite(id);
+    callBackDeleteFavorite(id);
   };
 
   const selectFavorite = (id: number) => {
-    callbackCurrentCity(id);
+    callBackCurrentCity(id);
   };
 
   const cities = myFavorites.map((city) => (

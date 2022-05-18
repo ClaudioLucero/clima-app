@@ -9,16 +9,27 @@ import './SearchCities.css';
 
 interface Props {
   myFavorites: Favorite[],
-  callbackSetCurrentCity:Function
+  callBackSetCurrentCity:Function
+  callBackDeleteFavorite:Function
+  callBackAddFavorite:Function
 }
-const SearchCities: React.FC<Props> = ({ myFavorites, callbackSetCurrentCity }: Props) => {
+const SearchCities: React.FC<Props> = ({
+  myFavorites, callBackSetCurrentCity, callBackDeleteFavorite, callBackAddFavorite,
+}: Props) => {
   const [valueSearch, setValueSearch] = useState('');
   const [results, setResults] = useState<Favorite[]>([]);
 
   const changeValueInput = (city:City) => {
     setValueSearch(city.name);
-    callbackSetCurrentCity(city.id);
+    callBackSetCurrentCity(city.id);
     setResults([]);
+  };
+  const editeFavorites = (city:Favorite, type: string) => {
+    if (type === 'add') {
+      callBackAddFavorite(city);
+    } else {
+      callBackDeleteFavorite(city.id);
+    }
   };
 
   const handleInput = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,11 +42,18 @@ const SearchCities: React.FC<Props> = ({ myFavorites, callbackSetCurrentCity }: 
       setResults([]);
     }
   };
+
   return (
     <div className="search-cities">
       <input className="search-cities-input" onChange={handleInput} value={valueSearch} />
       {results.length > 0
-        ? <ResultsCity results={results} callbackValueSearch={changeValueInput} />
+        ? (
+          <ResultsCity
+            results={results}
+            callbackValueSearch={changeValueInput}
+            callbackEditeFavorites={editeFavorites}
+          />
+        )
         : null}
     </div>
   );

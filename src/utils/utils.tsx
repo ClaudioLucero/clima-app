@@ -113,6 +113,11 @@ export const getFavorites = ():Favorite[] => {
       id: 3433955,
       fav: true,
     },
+    {
+      name: 'Formosa Province',
+      id: 3433896,
+      fav: true,
+    },
   ];
   return INT_FAVORITES;
 };

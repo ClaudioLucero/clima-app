@@ -10,19 +10,21 @@
     margin-top: 58px;
     align-items: stretch;
 }
-.results-city-res{
+.result-city-main{
     display: flex;
     border-bottom: solid;
     border-width: 1px;
     margin: 3px;
     justify-content: space-between;
 }
+.results-city-res{
+   
+}
 .results-city-ico{
     cursor: pointer;
 
 }
 .results-city-name{
-    width: 317px;
     display: inline-flex;
     margin: 14px;
     cursor: pointer;
