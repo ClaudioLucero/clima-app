@@ -1,13 +1,34 @@
 .next-temps-main{
+    width: 58vw;margin-top: 3px;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
 }
 .next-temps-days{
     display: flex;
-    justify-content: center; 
-    margin:10px 
+    Background-color: bisque;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+    transition: 0.3s;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 5px;    
 }
-.next-temps-days-title{
-    margin-right: 22px;
+.top {
+     height: 22px;   
 }
-.next-temps-days-max{
-    margin-right: 10px;
+.next-temps-days-icon{
+    width: 25px;
+}
+.next-temps-titles{
+    display: flex;
+    Background-color: bisque;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+    transition: 0.3s;
+    /* padding-left: 51px; */
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.next-temps-days-col{
+    width: 14vw;
 }

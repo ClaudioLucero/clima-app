@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable array-callback-return */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 // chequear
@@ -9,6 +10,14 @@ import province from '../provinces-arg.json';
 export const getToday = () => {
   const today = new Date().toLocaleDateString('en-us', { weekday: 'long', month: 'long', day: 'numeric' });
   return today;
+};
+export const getNextdays = ():string[] => {
+  const week = [];
+  for (let index = 1; index < 6; index++) {
+    const tomorrow = new Date();
+    week[index] = `${tomorrow.getDate() + index}-${tomorrow.getMonth() + index}-${tomorrow.getFullYear()}`;
+  }
+  return week;
 };
 
 const setFavorite = (idCity:number, favorites:Favorite[]) => { // corregir

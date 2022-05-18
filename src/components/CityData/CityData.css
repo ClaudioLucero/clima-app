@@ -1,6 +1,6 @@
 .city-data-main{
     Background-color: bisque;
-    height: 43vh;
+    min-height: 43vh;
     display: flex;
     border-radius: 12px;
     align-items: center;
@@ -8,6 +8,7 @@
     transition: 0.3s;
     flex-direction: column;
     justify-content: center;
+    padding: 10px;
 }
 .city-data-main:hover{
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
@@ -26,19 +27,17 @@
     flex-direction: row;  
 }
 .city-data-temps-image{   
-    height: 43px;
-    width: 58px;
+    width: 9vw;
 }
 .city-data-city{
     font-size: 36px;
 }
 .city-data-temps{
     font-size: 25px;
-    margin: 33px;
 }
 .city-data-temps-max{
     color: #10a016;
-    font-size: 9vw;
+    font-size: 5vw;
     font-weight: bold;
 }
 .city-data-temps-min{

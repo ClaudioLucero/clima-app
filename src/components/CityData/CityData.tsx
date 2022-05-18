@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable quotes */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React from 'react';
@@ -12,6 +13,7 @@ interface Props {
 const DataCity: React.FC<Props> = ({ current }: Props) => {
   const today = getToday();
   const { name, todayTemp } = current;
+  const desc = (todayTemp.description).toLocaleUpperCase();
   return (
     <div className="city-data-main">
       <div className="city-data-left">
@@ -24,7 +26,7 @@ const DataCity: React.FC<Props> = ({ current }: Props) => {
       </div>
       <div className="city-data-right">
         <div className="city-data-main-info">
-          <div className="city-data-temps-image" style={{ background: `url(http://openweathermap.org/img/wn/${todayTemp.icon}.png)`, backgroundRepeat: 'no-repeat' }} />
+          <img className="city-data-temps-image" src={`http://openweathermap.org/img/wn/${todayTemp.icon}@2x.png`} />
           <div className="city-data-temps-max">
             {todayTemp.max_temp}
             °C
@@ -32,7 +34,7 @@ const DataCity: React.FC<Props> = ({ current }: Props) => {
         </div>
         <div className="city-data-temps">
           <div className="city-data-temps-description">
-            {todayTemp.description}
+            {desc}
             <br />
             Feel like
             {' '}
