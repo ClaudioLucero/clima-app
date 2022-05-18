@@ -6,6 +6,11 @@ import { Temp } from '../models/Temp';
 import { Favorite } from '../models/Favorite';
 import province from '../provinces-arg.json';
 
+export const getToday = () => {
+  const today = new Date().toLocaleDateString('en-us', { weekday: 'long', month: 'long', day: 'numeric' });
+  return today;
+};
+
 const setFavorite = (idCity:number, favorites:Favorite[]) => { // corregir
   let res = false;
   favorites.map((item) => {

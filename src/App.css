@@ -16,6 +16,7 @@
   min-height: 89.3vh;
   display: flex;
   flex-direction: column; 
+  border-top: 2px solid bisque;
 }
 .App-header-font{
   font-size: 43px;
