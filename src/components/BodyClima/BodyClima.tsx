@@ -11,7 +11,8 @@ import { getFavorites } from '../../utils/utils';
 import './BodyClima.css';
 
 interface Props {
-  lon: number,
+  msg:string|null
+  lon: number
   lat: number
 }
 
@@ -21,7 +22,7 @@ interface AppState {
   cityData: City
 }
 
-const BodyClima: React.FC<Props> = ({ lon, lat }: Props) => {
+const BodyClima: React.FC<Props> = ({ lon, lat, msg }: Props) => {
   const [currentCityId, setCurrentCityId] = useState<AppState['currentCityId']>();
   const [cityData, setCityData] = useState<AppState['cityData']>();
   const [favorites, setFavorites] = useState<AppState['favorites']>([]);
@@ -73,6 +74,8 @@ const BodyClima: React.FC<Props> = ({ lon, lat }: Props) => {
         callBackCurrentCity={updateCurrentCity}
         callBackDeleteFavorite={deleteFavorite}
       />
+      {msg !== null ? <div>{msg}</div>
+        : null}
       <SearchCities
         myFavorites={favorites}
         callBackSetCurrentCity={updateCurrentCity}

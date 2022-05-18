@@ -12,7 +12,7 @@ const App: React.FC = () => {
   const [lon, setLon] = useState<number | null>(null);
   useEffect(() => {
     if (!navigator.geolocation) {
-      setStatus('Geolocation is not supported by your browser');
+      setStatus('* Geolocation is not supported by your browser');
     } else {
       setStatus('Locating...');
       navigator.geolocation.getCurrentPosition((position) => {
@@ -20,7 +20,7 @@ const App: React.FC = () => {
         setLat(position.coords.latitude);
         setLon(position.coords.longitude);
       }, () => {
-        setStatus('Unable to retrieve your location');
+        setStatus('* Unable to retrieve your location');
       });
     }
   }, []);
@@ -33,8 +33,8 @@ const App: React.FC = () => {
       </div>
       <div className="App-body">
         {lon && lat
-          ? <BodyClima lon={lon} lat={lat} />
-          : <div>{status}</div>}
+          ? <BodyClima lon={lon} lat={lat} msg={null} />
+          : <BodyClima lon={-58.450001} lat={-34.599998} msg={status} />}
         {/* corregir */}
       </div>
     </div>
