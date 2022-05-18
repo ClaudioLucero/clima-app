@@ -4,3 +4,24 @@
     align-content: center;
     align-items: center;
 }
+
+.loader {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    border: 10px solid bisque;
+    border-top-color: #007ced;
+    box-sizing: border-box;
+    background: transparent;
+    animation: loading 1s linear infinite;
+  }
+  
+  @keyframes loading {
+    0% {
+      transform: rotate(0deg);
+    }
+    0% {
+      transform: rotate(360deg);
+    }
+  }
+  

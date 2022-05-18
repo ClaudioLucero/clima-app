@@ -25,6 +25,7 @@ const BodyClima: React.FC<Props> = ({ lon, lat }: Props) => {
   const [currentCityId, setCurrentCityId] = useState<AppState['currentCityId']>();
   const [cityData, setCityData] = useState<AppState['cityData']>();
   const [favorites, setFavorites] = useState<AppState['favorites']>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const deleteFavorite = (id: number) => {
     setFavorites(favorites.filter((item) => item.id !== id));
@@ -36,21 +37,25 @@ const BodyClima: React.FC<Props> = ({ lon, lat }: Props) => {
   };
 
   const updateCurrentCity = (id: number) => {
+    setLoading(false);
     getClimaById(id).then((data: City) => {
       if (data) {
         setCurrentCityId(data.id);
         setCityData(data);
+
+        setLoading(true);
       }
     });
   };
   useEffect(() => {
     const myFavorites = getFavorites();
+    setLoading(false);
     getClimaByGelocation(lat, lon).then((data: City) => {
       if (data) {
         setCityData(data);
         setCurrentCityId(data.id);
         setFavorites(myFavorites);
-        console.log(data);
+        setLoading(true);
       }
     });
   }, []);
@@ -74,14 +79,14 @@ const BodyClima: React.FC<Props> = ({ lon, lat }: Props) => {
         callBackDeleteFavorite={deleteFavorite}
         callBackAddFavorite={addFavorite}
       />
-      {cityData
+      {loading && cityData
         ? (
           <>
             <CityData current={cityData} />
             <NextTemps current={cityData} />
           </>
         )
-        : null}
+        : <div className="loader" />}
     </div>
   );
 };

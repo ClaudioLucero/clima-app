@@ -45,7 +45,7 @@ const SearchCities: React.FC<Props> = ({
 
   return (
     <div className="search-cities">
-      <input className="search-cities-input" onChange={handleInput} value={valueSearch} />
+      <input className="search-cities-input" onChange={handleInput} value={valueSearch} placeholder="Search provinces of Argentina" />
       {results.length > 0
         ? (
           <ResultsCity
