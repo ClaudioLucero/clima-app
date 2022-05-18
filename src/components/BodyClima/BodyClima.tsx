@@ -8,6 +8,7 @@ import { getClimaByGelocation, getClimaById } from '../../services/apliClima';
 import { City } from '../../models/City';
 import { Favorite } from '../../models/Favorite';
 import { getFavorites } from '../../utils/utils';
+import './BodyClima.css';
 
 interface Props {
   lon:number,
@@ -56,7 +57,7 @@ const BodyClima: React.FC<Props> = ({ lon, lat }: Props) => {
   }, [cityData]);
 
   return (
-    <div className="">
+    <div className="body-clima-main">
       <Favorites
         myFavorites={favorites}
         callbackCurrentCity={updateCurrentCity}
