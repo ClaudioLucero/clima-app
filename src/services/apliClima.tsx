@@ -1,6 +1,5 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-// chequear
 import { formatDataTempResApi, formatDataResCity } from '../utils/utils';
 import { City } from '../models/City';
 import { Temp } from '../models/Temp';

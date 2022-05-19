@@ -6,11 +6,13 @@ import { City } from '../models/City';
 import { Temp } from '../models/Temp';
 import { Favorite } from '../models/Favorite';
 import province from '../provinces-arg.json';
-
+// fecha actual
 export const getToday = () => {
   const today = new Date().toLocaleDateString('en-us', { weekday: 'long', month: 'long', day: 'numeric' });
   return today;
 };
+
+// fecha de los proximos 5 dias a partir de hoy
 export const getNextdays = ():string[] => {
   const week = [];
   for (let index = 1; index < 6; index++) {
@@ -20,7 +22,8 @@ export const getNextdays = ():string[] => {
   return week;
 };
 
-const setFavorite = (idCity:number, favorites:Favorite[]) => { // corregir
+// verifico si el resultado de busqueda està en favoritos
+const isFavorite = (idCity:number, favorites:Favorite[]) => { // corregir
   let res = false;
   favorites.map((item) => {
     if (idCity === item.id) {
@@ -30,8 +33,9 @@ const setFavorite = (idCity:number, favorites:Favorite[]) => { // corregir
   return res;
 };
 
+// doy formato de Favorito  al resultado busqueda
 const formatDataSearch = (res:any, favorites:Favorite[]) => {
-  const isFav = setFavorite(res.id, favorites);
+  const isFav = isFavorite(res.id, favorites);
   const results:Favorite = {
     name: res.name,
     id: res.id,
@@ -40,6 +44,7 @@ const formatDataSearch = (res:any, favorites:Favorite[]) => {
   return results;
 };
 
+// busco provincia segun lo typeado en el inpud de SearchCities
 export const searchProvince = (value: string, favorites:Favorite[]) => {
   const res:Favorite[] = [];
   province.map((item) => {
@@ -51,6 +56,7 @@ export const searchProvince = (value: string, favorites:Favorite[]) => {
   return res;
 };
 
+// doy formato Temp a las temparaturas que viene en los resultados de pronosticos de la API
 export const formatDataTempResApi = (res:any) => {
   const temps :Temp[] = [];
   res.map((tmp:any) => {
@@ -70,6 +76,7 @@ export const formatDataTempResApi = (res:any) => {
   return temps;
 };
 
+// doy formato City a los resltados del clima actual de la API
 export const formatDataResCity = (res:any, favorite:boolean) => {
   const resCity: City = {
     name: res.name,
@@ -91,6 +98,8 @@ export const formatDataResCity = (res:any, favorite:boolean) => {
   };
   return resCity;
 };
+
+// Favoritos por defecto
 export const getFavorites = ():Favorite[] => {
   const INT_FAVORITES:Favorite[] = [
     {
