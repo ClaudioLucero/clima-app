@@ -1,17 +1,13 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './Favorites.css';
-import { City } from '../../models/City';
 import { Favorite } from '../../models/Favorite';
 
 interface Props {
   myFavorites: Favorite[],
   callBackCurrentCity: Function
   callBackDeleteFavorite: Function
-}
-interface AppState {
-  favs: Favorite[]
 }
 
 const Favorites: React.FC<Props> = ({

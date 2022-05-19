@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ResultsCity from '../ResultsCity/ResultsCity';
 import { searchProvince } from '../../utils/utils';
 import { City } from '../../models/City';
@@ -13,17 +13,23 @@ interface Props {
   callBackDeleteFavorite:Function
   callBackAddFavorite:Function
 }
+interface AppState {
+  results:Favorite[]
+}
+
 const SearchCities: React.FC<Props> = ({
   myFavorites, callBackSetCurrentCity, callBackDeleteFavorite, callBackAddFavorite,
 }: Props) => {
   const [valueSearch, setValueSearch] = useState('');
-  const [results, setResults] = useState<Favorite[]>([]);
-
+  const [results, setResults] = useState<AppState['results']>([]);
+  // llamo al callback de seleccion de ciudad actual para
+  // ver datos de la ciudad seleccionada desde el buscador
   const changeValueInput = (city:City) => {
     setValueSearch(city.name);
     callBackSetCurrentCity(city.id);
     setResults([]);
   };
+  // ejecuto cuando el evento onclic de ResultCity se acciona al clickear en el icon de favorito
   const editeFavorites = (city:Favorite, type: string) => {
     if (type === 'add') {
       callBackAddFavorite(city);
@@ -31,11 +37,14 @@ const SearchCities: React.FC<Props> = ({
       callBackDeleteFavorite(city.id);
     }
   };
-
+  // cada vez que typeo en el buscador ejecuto
   const handleInput = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setValueSearch(evt.target.value);
     const { value } = evt.target;
+    // comienzo a realizar busquedas despues de typear 3 caracteres
     if (value.length > 2) {
+      // busca dentro de provinces-arg.json que tiene latiudes y longitudes de prvincias.
+      // datos de provincias obtenidos desde archivo descargable de https://openweathermap.org/api
       const res:Favorite[] = searchProvince(value.toLocaleUpperCase(), myFavorites);
       setResults(res);
     } else {

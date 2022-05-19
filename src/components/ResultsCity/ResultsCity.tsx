@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './ResultsCity.css';
 import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
-import { City } from '../../models/City';
 import { Favorite } from '../../models/Favorite';
 
 interface Props {
@@ -14,10 +13,12 @@ interface Props {
 const ResultsCity: React.FC<Props> = ({
   results, callbackValueSearch, callbackEditeFavorites,
 }: Props) => {
+  // la accion  llega hasta el componente padre BodyClima para editar ciudad seleccionada
   const selectResultCity = (city: Favorite) => {
     callbackValueSearch(city);
   };
 
+  // la accion  llega hasta el componente padre BodyClima para editar favorites
   const deleteFavorite = (city:Favorite) => {
     callbackEditeFavorites(city, 'delete');
   };
