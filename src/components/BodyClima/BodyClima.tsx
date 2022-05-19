@@ -17,56 +17,51 @@ interface Props {
 }
 
 interface AppState {
-  currentCityId: number
   favorites: Favorite[]
   cityData: City
 }
 
 const BodyClima: React.FC<Props> = ({ lon, lat, msg }: Props) => {
-  const [currentCityId, setCurrentCityId] = useState<AppState['currentCityId']>();
   const [cityData, setCityData] = useState<AppState['cityData']>();
   const [favorites, setFavorites] = useState<AppState['favorites']>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
+  // funcion que se pasa al componente SearchCity para
+  // eliminar favorito desde resultados de busqueda
   const deleteFavorite = (id: number) => {
     setFavorites(favorites.filter((item) => item.id !== id));
   };
+  // funcion que se pasa al componente SearchCity para
+  // agregar favorito desde resultados de busqueda
   const addFavorite = (city:Favorite) => {
+    // solo permito guardar 5 favoritos
     if (favorites.length < 5) {
       setFavorites((prev: Favorite[]) => [...prev, city]);
     }
   };
-
+  // mantengo en estado la ciudad seleccionada desde Search o Favoritospara mostrar sus temperaturas
   const updateCurrentCity = (id: number) => {
     setLoading(false);
     getClimaById(id).then((data: City) => {
       if (data) {
-        setCurrentCityId(data.id);
         setCityData(data);
-
         setLoading(true);
       }
     });
   };
   useEffect(() => {
+    // cargo favoritos guardados por defecto
     const myFavorites = getFavorites();
     setLoading(false);
+    // cargo datos de ciudad detectada por geolocalizacion del browser
     getClimaByGelocation(lat, lon).then((data: City) => {
       if (data) {
         setCityData(data);
-        setCurrentCityId(data.id);
         setFavorites(myFavorites);
         setLoading(true);
       }
     });
   }, []);
-
-  useEffect(() => {
-    if (cityData) {
-      setCurrentCityId(cityData.id);
-    }
-  }, [cityData]);
-
   return (
     <div className="body-clima-main">
       <Favorites

@@ -3,14 +3,17 @@ import './App.css';
 import BodyClima from './components/BodyClima/BodyClima';
 
 interface AppState {
-  location: Location
+  status:string | null
+  lon: number | null
+  lat: number | null
 }
 
 const App: React.FC = () => {
-  const [status, setStatus] = useState<string | null>(null);
-  const [lat, setLat] = useState<number | null>(null);
-  const [lon, setLon] = useState<number | null>(null);
+  const [status, setStatus] = useState<AppState['status']>(null);
+  const [lat, setLat] = useState<AppState['lat']>(null);
+  const [lon, setLon] = useState<AppState['lon']>(null);
   useEffect(() => {
+    // verifico geolocalizacion del navegador
     if (!navigator.geolocation) {
       setStatus('* Geolocation is not supported by your browser');
     } else {
@@ -34,12 +37,11 @@ const App: React.FC = () => {
       <div className="App-body">
         {lon && lat
           ? <BodyClima lon={lon} lat={lat} msg={null} />
-          : <BodyClima lon={-58.450001} lat={-34.599998} msg={status} />}
-        {/* corregir */}
+          // en caso de no permitir o tener desactivada la gelolocalizacion
+          : <div>{status}</div>}
       </div>
     </div>
   );
 };
 
 export default App;
-// npx eslint src
