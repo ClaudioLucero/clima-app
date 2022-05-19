@@ -1,7 +1,9 @@
 .favorites{
     display: flex;
-    justify-content: center;
     padding-top: 6px;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: flex-start;
 }
 
 .favourites-city{
@@ -24,3 +26,9 @@
     cursor: pointer;
     font-size: 18px;
 }
+@media only screen and (max-width: 600px) {
+    .favourites-city-name{
+        font-size: 14px;
+
+    }
+  }

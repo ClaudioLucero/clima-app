@@ -1,6 +1,8 @@
 .next-temps-main{
-    width: 58vw;margin-top: 3px;
+    width: 58vw;
+    margin-top: 3px;
     box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+    font-size: 17px;
 }
 .next-temps-days{
     display: flex;
@@ -32,3 +34,17 @@
 .next-temps-days-col{
     width: 14vw;
 }
+
+@media only screen and (max-width: 680px) {
+    .next-temps-main{
+        font-size: 14px;
+    }
+  }
+@media only screen and (max-width: 480px) {
+    .next-temps-main{
+        font-size: 11px;
+        width: 40vh;
+
+    }
+  }
+  

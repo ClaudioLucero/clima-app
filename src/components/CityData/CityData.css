@@ -27,7 +27,7 @@
     flex-direction: row;  
 }
 .city-data-temps-image{   
-    width: 9vw;
+    width: 80px;
 }
 .city-data-city{
     font-size: 36px;
@@ -37,7 +37,7 @@
 }
 .city-data-temps-max{
     color: #10a016;
-    font-size: 5vw;
+    font-size: 70px;
     font-weight: bold;
 }
 .city-data-temps-min{
@@ -54,3 +54,26 @@
     flex-direction: column;
     align-items: center;
 }
+@media only screen and (max-width: 500px) {
+    .city-data-city{
+        font-size: 20px;
+    } 
+    .city-data-day{
+        font-size: 15px;
+    }
+    .city-data-temps{
+        font-size: 15px;
+    }
+    .city-data-temps-max{
+        font-size: 38px;
+    }
+    .city-data-temps-image{   
+        width: 45px;
+    }
+  }
+  @media only screen and (max-width: 280px) {
+    .city-data-main{
+        width: 149px;
+    } 
+    
+  }
