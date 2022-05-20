@@ -22,6 +22,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 
 ### Arquitectura de Componentes
+```
 < App >
       < BodyClima >
                   < Favorites /> 
@@ -32,6 +33,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
                   < NextTemps />
     < /BodyClima >
 < /App >
+
 
 ## Inicio App
 Al iniciar la aplicacion, solicita permisos para detectar latitud y longitud.Con los datos de geolocalización del navegador realiza la consulta del clima a la api de Openweathermap
