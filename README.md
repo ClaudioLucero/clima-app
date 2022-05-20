@@ -2,6 +2,15 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Node Version
+16.5.0
+
+## Npm Version
+7.19.1
+
+## React Version
+^18.1.0
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -11,36 +20,24 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+### Arquitectura de Componentes
+< App >
+      < BodyClima >
+                  < Favorites /> 
+                  < SearchCities >
+                                 < ResultsCity />
+                  < /SearchCities >
+                  < CityData />
+                  < NextTemps />
+    < /BodyClima >
+< /App >
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Inicio App
+Al iniciar la aplicacion, solicita permisos para detectar latitud y longitud.Con los datos de geolocalización del navegador realiza la consulta del clima a la api de Openweathermap
 
-### `npm run build`
+## Favoritos
+Inicialmente cuanta con 5 provincias favoritas guardadas por defecto, el usuario puede eliminar las provincias favoritas y agregar nuevas desde los resultados de busqueda.El limite de favoritos es de 5.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Busquedas
+Openweathermap proveé un archivo zip con todas las ciudades del mundo con sus respectivos id's, datos de latitud y longitud para poder consultar el clima.Se extrajeron los datos de las provincias argentinas y guardaron en el archivo ' provinces-arg-json'  en donde la aplicacion realiza las busquedas desde el buscador.
