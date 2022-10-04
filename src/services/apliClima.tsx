@@ -5,7 +5,7 @@ import { City } from '../models/City';
 import { Temp } from '../models/Temp';
 
 const API = 'https://api.openweathermap.org/data/2.5';
-const APIKEY = '9d03f75cd013afb4dacea81fe4cd97ca';
+const APIKEY = '--';
 
 const formatQuery = (type:string, id?:number, lat?:number, lon?:number) => {
   if (lat) {
