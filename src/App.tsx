@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import BodyClima from './components/BodyClima/BodyClima';
+import { WeatherProvider } from './components/Context/WeatherContext';
 
 interface AppState {
   status:string | null
@@ -28,19 +29,21 @@ const App: React.FC = () => {
     }
   }, []);
   return (
-    <div className="App">
-      <div className="App-header">
-        <div id="cloud-intro">
-          <div className="App-header-font">ClimApp</div>
+    <WeatherProvider>
+      <div className="App">
+        <div className="App-header">
+          <div id="cloud-intro">
+            <div className="App-header-font">ClimApp</div>
+          </div>
+        </div>
+        <div className="App-body">
+          {lon && lat
+            ? <BodyClima lon={lon} lat={lat} msg={null} />
+            // en caso de no permitir o tener desactivada la gelolocalizacion
+            : <div>{status}</div>}
         </div>
       </div>
-      <div className="App-body">
-        {lon && lat
-          ? <BodyClima lon={lon} lat={lat} msg={null} />
-          // en caso de no permitir o tener desactivada la gelolocalizacion
-          : <div>{status}</div>}
-      </div>
-    </div>
+    </WeatherProvider>
   );
 };
 

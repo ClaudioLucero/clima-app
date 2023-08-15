@@ -4,7 +4,8 @@ import SearchCities from '../SearchCities/SearchCities';
 import Favorites from '../Favorites/Favorites';
 import CityData from '../CityData/CityData';
 import NextTemps from '../NextTemps/NextTemps';
-import { getClimaByGelocation, getClimaById } from '../../services/apliClima';
+import { useWeatherContext } from '../Context/WeatherContext'; // Importa el contexto
+import { getClimaByGelocation } from '../../services/apiClima';
 import { City } from '../../models/City';
 import { Favorite } from '../../models/Favorite';
 import { getFavorites } from '../../utils/utils';
@@ -22,9 +23,28 @@ interface AppState {
 }
 
 const BodyClima: React.FC<Props> = ({ lon, lat, msg }: Props) => {
-  const [cityData, setCityData] = useState<AppState['cityData']>();
+  const { weatherData, updateWeatherData } = useWeatherContext(); // Utiliza el contexto
   const [favorites, setFavorites] = useState<AppState['favorites']>([]);
   const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    // Cuando weatherData cambie en el contexto, actualiza el estado local
+    if (weatherData) {
+      setLoading(true);
+    }
+  }, [weatherData]);
+
+  useEffect(() => {
+    if (lat && lon) {
+      setLoading(false);
+      getClimaByGelocation(lat, lon).then((data: City) => {
+        if (data) {
+          updateWeatherData(data); // Actualiza los datos en el contexto
+          setLoading(true);
+        }
+      });
+    }
+  }, [lat, lon]);
 
   // funcion que se pasa al componente SearchCity para
   // eliminar favorito desde resultados de busqueda
@@ -40,15 +60,15 @@ const BodyClima: React.FC<Props> = ({ lon, lat, msg }: Props) => {
     }
   };
   // mantengo en estado la ciudad seleccionada desde Search o Favoritospara mostrar sus temperaturas
-  const updateCurrentCity = (id: number) => {
-    setLoading(false);
-    getClimaById(id).then((data: City) => {
-      if (data) {
-        setCityData(data);
-        setLoading(true);
-      }
-    });
-  };
+  // const updateCurrentCity = (id: number) => {
+  //   setLoading(false);
+  //   getClimaById(id).then((data: City) => {
+  //     if (data) {
+  //       setCityData(data);
+  //       setLoading(true);
+  //     }
+  //   });
+  // };
   useEffect(() => {
     // cargo favoritos guardados por defecto
     const myFavorites = getFavorites();
@@ -56,7 +76,6 @@ const BodyClima: React.FC<Props> = ({ lon, lat, msg }: Props) => {
     // cargo datos de ciudad detectada por geolocalizacion del browser
     getClimaByGelocation(lat, lon).then((data: City) => {
       if (data) {
-        setCityData(data);
         setFavorites(myFavorites);
         setLoading(true);
       }
@@ -64,7 +83,7 @@ const BodyClima: React.FC<Props> = ({ lon, lat, msg }: Props) => {
   }, []);
   return (
     <div className="body-clima-main">
-      <Favorites
+      {/* <Favorites
         myFavorites={favorites}
         callBackCurrentCity={updateCurrentCity}
         callBackDeleteFavorite={deleteFavorite}
@@ -76,12 +95,12 @@ const BodyClima: React.FC<Props> = ({ lon, lat, msg }: Props) => {
         callBackSetCurrentCity={updateCurrentCity}
         callBackDeleteFavorite={deleteFavorite}
         callBackAddFavorite={addFavorite}
-      />
-      {loading && cityData
+      /> */}
+      {loading && weatherData
         ? (
           <>
-            <CityData current={cityData} />
-            <NextTemps current={cityData} />
+            <CityData current={weatherData} />
+            <NextTemps current={weatherData} />
           </>
         )
         : <div className="loader" />}
