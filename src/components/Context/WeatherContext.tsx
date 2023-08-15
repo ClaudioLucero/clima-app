@@ -1,25 +1,27 @@
 // Context/WeatherContext.tsx
 import React, { createContext, useContext, useState, useMemo, ReactNode } from 'react';
+import { City } from '../../models/City';
+import { Temp } from '../../models/Temp';
 
 interface WeatherContextType {
-  weatherData: any; // Ajusta el tipo de datos aquí
-  updateWeatherData: (newData: any) => void; // Ajusta el tipo de datos aquí
+  weatherData: City | null;
+  updateWeatherData: (newData: City | null) => void;
 }
 
 const WeatherContext = createContext<WeatherContextType | undefined>(undefined);
 
-export function useWeatherContext(): WeatherContextType {
+export const useWeatherContext = (): WeatherContextType => {
   const context = useContext(WeatherContext);
   if (!context) {
     throw new Error('useWeatherContext must be used within a WeatherProvider');
   }
   return context;
-}
+};
 
-export function WeatherProvider({ children }: { children: ReactNode }): JSX.Element {
-  const [weatherData, setWeatherData] = useState<any | null>(null); // Ajusta el tipo de datos aquí
+export const WeatherProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [weatherData, setWeatherData] = useState<City | null>(null);
 
-  const updateWeatherData = (newData: any) => {
+  const updateWeatherData = (newData: City | null) => {
     setWeatherData(newData);
   };
 
@@ -30,4 +32,4 @@ export function WeatherProvider({ children }: { children: ReactNode }): JSX.Elem
       {children}
     </WeatherContext.Provider>
   );
-}
+};

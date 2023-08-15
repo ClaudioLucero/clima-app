@@ -5,7 +5,7 @@ import { City } from '../models/City';
 import { Temp } from '../models/Temp';
 
 const API = 'https://api.openweathermap.org/data/2.5';
-const APIKEY = '--';
+const APIKEY = '9d03f75cd013afb4dacea81fe4cd97ca';
 
 const formatQuery = (type:string, id?:number, lat?:number, lon?:number) => {
   if (lat) {
@@ -14,7 +14,7 @@ const formatQuery = (type:string, id?:number, lat?:number, lon?:number) => {
   return `${API}/${type}?id=${id}&appid=${APIKEY}&cnt=5&units=metric`;
 };
 
-export const getClimaById = async (id:number) => {
+export const getClimaById = async (id: number): Promise<City> => {
   const res = fetch(formatQuery('weather', id));
   const data = await (await res).json();
   const dataCity:City = formatDataResCity(data, false);
@@ -26,7 +26,7 @@ export const getClimaById = async (id:number) => {
   }
   return dataCity;
 };
-export const getClimaByGelocation = async (lat:number, lon:number) => {
+export const getClimaByGelocation = async (lat: number, lon: number): Promise<City> => {
   const res = fetch(formatQuery('weather', 0, lat, lon));
   const data = await (await res).json();
   const dataCity:City = formatDataResCity(data, false);
